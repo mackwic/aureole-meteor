@@ -1,0 +1,36 @@
+head
+  title Auré-olé-olé-olé
+body
+
+  .row.col-lg-offset-2
+    h1.col-md-12.page-header Auré-olé-olé-olé
+    .col-md-6.col-lg-4
+      h3 Liste des personnages
+      +perso_list
+    .col-md-3.col-lg-offset-1
+      h3 Ajouter un nouveau personnage
+      +quickForm(
+        id="newPerso" type="insert"
+        schema="Schemas.Persos" collection="Persos"
+        omitFields="stats.currentHp"
+      )
+template(name="perso_list")
+  .list-group
+    a.list-group-item(href="#").list-group-item-info
+      span.fa.fa-plus-square
+      strong Nouveau Personnage
+    each persos
+      a.list-group-item(href="#")
+        strong= main.name
+        em= main.alignment
+        span (#{stats.maxHp} HP)
+
+template(name="perso_item")
+  span.col-md-3= main.name
+  span.col-md-3= main.alignment
+  span.col-md-3= stats.maxHp
+
+template(name="infos")
+  label Nombre de persos: 
+  span.label.label-primary= counter
+
